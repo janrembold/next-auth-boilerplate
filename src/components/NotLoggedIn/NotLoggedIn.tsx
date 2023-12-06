@@ -1,0 +1,11 @@
+"use client";
+import { signIn } from "next-auth/react";
+
+export const NotLoggedIn = () => {
+  return (
+    <>
+      Not signed in <br />
+      <button onClick={() => signIn()}>Sign in</button>
+    </>
+  );
+};
