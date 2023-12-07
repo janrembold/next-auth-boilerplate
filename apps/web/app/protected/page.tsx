@@ -15,7 +15,8 @@ export default withPageAuthRequired(
     if (accessToken) {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/backend/private`,
+          `https://next-auth-fullstack-uw7g4.ondigitalocean.app/backend/private`,
+          // `${process.env.NEXT_PUBLIC_BASE_URL}/backend/private`,
           {
             method: "GET",
             headers: {
