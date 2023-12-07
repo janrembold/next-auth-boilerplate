@@ -9,10 +9,11 @@ export default withPageAuthRequired(
     await touchSession();
     const session = await getSession();
     const accessToken = session?.accessToken;
+    let data = "nothing-found";
 
     if (accessToken) {
       try {
-        const response = await fetch("http://localhost:4000/api/private", {
+        const response = await fetch("/backend/private", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -24,10 +25,9 @@ export default withPageAuthRequired(
           throw new Error(`Request failed with status ${response.status}`);
         }
 
-        const data = await response.json();
-        console.log("Data:", data);
+        data = await response.json();
       } catch (error) {
-        console.error("Error fetching data:", error.message);
+        data = error.message;
       }
     }
 
@@ -49,6 +49,8 @@ export default withPageAuthRequired(
         </pre>
         <h3>User</h3>
         <pre>{JSON.stringify(session?.user, null, 2)}</pre>
+        <h3>API Response</h3>
+        <pre>{data}</pre>
       </main>
     );
   },
