@@ -28,7 +28,7 @@
     "turbo": "^1.11.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=18 <21"
   },
   "packageManager": "yarn@1.22.19"
 }
