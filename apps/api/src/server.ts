@@ -11,12 +11,12 @@ app.use(cors());
 // Authorization middleware. When used, the Access Token must
 // exist and be verified against the Auth0 JSON Web Key Set.
 const checkJwt = auth({
-  audience: "https://jr-freelance.eu.auth0.com/api/v2/",
-  issuerBaseURL: `https://jr-freelance.eu.auth0.com`,
+  audience: process.env.AUTH0_AUDIENCE,
+  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
 });
 
 // This route doesn't need authentication
-app.get("/api/public", function (req: Request, res: Response) {
+app.get("/public", function (req: Request, res: Response) {
   console.log("GET /public");
   res.json({
     message:
@@ -25,7 +25,7 @@ app.get("/api/public", function (req: Request, res: Response) {
 });
 
 // This route needs authentication
-app.get("/api/private", checkJwt, function (req: Request, res: Response) {
+app.get("/private", checkJwt, function (req: Request, res: Response) {
   res.json({
     message:
       "Hello from a private endpoint! You need to be authenticated to see this.",
@@ -35,7 +35,7 @@ app.get("/api/private", checkJwt, function (req: Request, res: Response) {
 const checkScopes = requiredScopes("read:messages");
 
 app.get(
-  "/api/private-scoped",
+  "/private-scoped",
   checkJwt,
   checkScopes,
   function (req: Request, res: Response) {

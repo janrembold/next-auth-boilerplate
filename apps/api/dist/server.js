@@ -28614,8 +28614,8 @@ var port = process.env.PORT || 4e3;
 var app = (0, import_express.default)();
 app.use((0, import_cors.default)());
 var checkJwt = (0, import_express_oauth2_jwt_bearer.auth)({
-  audience: "https://jr-freelance.eu.auth0.com/api/v2/",
-  issuerBaseURL: `https://jr-freelance.eu.auth0.com`
+  audience: process.env.AUTH0_AUDIENCE,
+  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL
 });
 app.get("/api/public", function(req, res) {
   console.log("GET /public");
