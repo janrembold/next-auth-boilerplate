@@ -10,7 +10,7 @@ export default withPageAuthRequired(
     await touchSession();
     const session = await getSession();
     const accessToken = session?.accessToken;
-    let data = "nothing-found";
+    let data = { message: "nothing-found" };
 
     if (accessToken) {
       try {
@@ -55,7 +55,9 @@ export default withPageAuthRequired(
         <h3>User</h3>
         <pre>{JSON.stringify(session?.user, null, 2)}</pre>
         <h3>API Response</h3>
-        <pre>{data}</pre>
+        <pre>{JSON.stringify(data, null, 2)}</pre>
+        <h3>Base URL</h3>
+        <p>{process.env.NEXT_PUBLIC_BASE_URL}</p>
       </main>
     );
   },
