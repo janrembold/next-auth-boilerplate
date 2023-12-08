@@ -1,6 +1,9 @@
 import express, { Request, Response } from "express";
-import { auth, requiredScopes } from "express-oauth2-jwt-bearer";
+import { auth } from "express-oauth2-jwt-bearer";
 import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const port = process.env.PORT || 4000;
 const app = express();
@@ -31,20 +34,6 @@ app.get("/private", checkJwt, function (req: Request, res: Response) {
       "Hello from a private endpoint! You need to be authenticated to see this.",
   });
 });
-
-const checkScopes = requiredScopes("read:messages");
-
-app.get(
-  "/private-scoped",
-  checkJwt,
-  checkScopes,
-  function (req: Request, res: Response) {
-    res.json({
-      message:
-        "Hello from a private endpoint! You need to be authenticated and have a scope of read:messages to see this.",
-    });
-  }
-);
 
 app.listen(port, function () {
   console.log(`Listening on http://localhost:${port}`);
