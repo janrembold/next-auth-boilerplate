@@ -4,19 +4,20 @@
   "globalEnv": ["NODE_ENV", "NEXT_PUBLIC_BASE_URL"],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^generate", "^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
-    "db:migrate:deploy": {},
-    "db:migrate:dev": {},
-    "db:push": {},
-    "db:seed": {},
+    "clean": {},
+    "db.migrate.deploy": {},
+    "db.migrate.dev": {},
+    "db.push": {},
     "dev": {
       "cache": false,
+      "dependsOn": ["^generate"],
       "persistent": true
     },
     "generate": {
-      "dependsOn": ["^generate"]
+      "cache": false
     },
     "lint": {}
   }

@@ -5,15 +5,14 @@
     "packages/*"
   ],
   "prisma": {
-    "schema": "packages/database/prisma/schema.prisma",
-    "seed": "tsx packages/database/src/seed.ts"
+    "schema": "packages/database/prisma/schema.prisma"
   },
   "scripts": {
     "build": "turbo run build",
-    "db:migrate:deploy": "turbo run db:migrate:deploy",
-    "db:migrate:dev": "turbo run db:migrate:dev",
-    "db:push": "turbo run db:push",
-    "db:seed": "turbo run db:seed",
+    "clean": "turbo run clean && rimraf node_modules",
+    "db.migrate.deploy": "turbo run db.migrate.deploy",
+    "db.migrate.dev": "turbo run db.migrate.dev",
+    "db.push": "turbo run db.push",
     "db.start": "docker-compose up -d",
     "db.stop": "docker-compose down",
     "dev": "turbo run dev",
@@ -25,6 +24,7 @@
     "@repo/eslint-config": "*",
     "prettier": "^3.1.0",
     "tsx": "^4.6.2",
+    "rimraf": "^5.0.5",
     "turbo": "^1.11.0"
   },
   "engines": {
